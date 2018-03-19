@@ -1,10 +1,4 @@
-# Leaf Notes
-
-![screen](./images/screen2.png)
-
-<caption><sup><span style="color: hsl(0, 0%, 40%);">⟶</span> <a href="https://tendril.ca/" target="_blank">https://tendril.ca/</a></sup></caption>
-
-<p></p>
+![screen](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/screen2.png?token=ABUdgxJHqyTSd5y_jr5ITB8JY1cFd-vyks5auSD9wA%3D%3D)
 
 I recently launched a small and interactive web toy for the Toronto-based design studio, [Tendril](https://tendril.ca/). You can try it out on their home page below. Their site rotates through different web toys, so you may need to reload once or twice to see it.
 
@@ -20,6 +14,10 @@ In this post, I'll explore how I created the web toy alongside the amazing team 
 
 ## Concept
 
+![mood](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/moodboard.png?token=ABUdg7U9xzcPvmZzetNMeuiDJkDv2oTdks5auSHTwA%3D%3D)
+
+<sup><em>— Early mood board</em></sup>
+
 For a while now, Tendril has been showcasing different interactive animations on their home page (examples: [1](https://www.instagram.com/p/Bb4kkPyFrnd/?hl=en&taken-by=studiotendril), [2](https://www.instagram.com/p/BeV1pZoFtHa/?taken-by=studiotendril)). They approached me with the idea of developing a new experience that introduces some aspects of generative growth and procedural geometry.
 
 The brief was very open: develop an interactive and playful toy for Tendril's home page. It should co-exist alongside their other web toys, be modestly designed and simple to use, and load fairly quickly. The interactions should be easy to pick up and the overall experience should align with Tendril and their website.
@@ -28,11 +26,9 @@ An open brief with full creative freedom was a welcome challenge for me. In the 
 
 After chatting over a few different ideas, we settled on the broad concept of "interacting with tropical plants".
 
-![mood](./images/moodboard.png)
-
 My early mood boards leaned toward a monochromatic and stark visual direction. It's great to reflect back on these, as it shows how much a project will change as it interates in development.
 
-> 💡 On a related note — I wish there was an open source tool for generating flexible masonry-style mood boards from a set of pictures. The UX of InVision Boards is great, but it's a pay-to-use service.
+<blockquote class="large"><p style="line-height: 22px;font-size: 14px;padding-top: 3px;">💡 On a related note — I wish there was an open source tool for generating flexible masonry-style mood boards from a set of pictures. The UX of InVision Boards is great, but it's a pay-to-use service.</p></blockquote>
 
 ## Generative Plants
 
@@ -134,7 +130,7 @@ Here's a few examples:
 
 ## Browser Pains
 
-I used a lot of my past modules to handle cross-browser differences, such as [`touches`](https://www.npmjs.com/package/touches) for unified mouse and touch handling, [`web-audio-player`](https://www.npmjs.com/package/web-audio-player) for iOS compatible WebAudio.
+I used a lot of my past modules to handle cross-browser differences, such as [touches](https://www.npmjs.com/package/touches) for unified mouse and touch handling, [web-audio-player](https://www.npmjs.com/package/web-audio-player) for iOS compatible WebAudio.
 
 There were a couple other particularly annoying browser issues that came up:
 
