@@ -4,7 +4,8 @@
 
 I recently launched a small and interactive web toy for the Toronto-based design studio, Tendril. You can try it out on their [home page](https://tendril.ca/). Their site rotates through different web toys, so you may need to reload once or twice to see it.
 
-<center><img src="https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/square-crop.gif?token=ABUdg7-vxckl3fDiV7MpWFi4KncKlokGks5auSkMwA%3D%3D" width="50%" /></center>
+<iframe src="https://player.vimeo.com/video/261147357?loop=1&title=0&byline=0&portrait=0" width="640" height="368" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 <p></p>
 
 The experience is simple: brush your mouse across the generative plants to see them blossom and emit musical tones.
@@ -137,15 +138,28 @@ Here's a few examples:
 - Depending on the position of mouse interactions, the sound is panned left or right, giving a sense of spatialization.
 - Lots of performance optimizations: the entire scene is just one shader and 3 different geometries (of varying subdivisions). Tons of time spent looking through profilers and optimizing functions until it rendered smoothly across all browsers and devices. Screen pixel density, leaf density, plant organization, and other variables are changed depending on your browser and resolution.
 
-## Performance & QA
+## Final Hurdles
 
+As usual with interactive web projects, the final stages of a project generally involve small tweaks to get things working smoothly across different browsers and devices.
 
+I used several of my past modules to handle general cross-platform issues, such as [touches](https://www.npmjs.com/package/touches) for unified mouse and touch handling and [web-audio-player](https://www.npmjs.com/package/web-audio-player) for iOS compatible WebAudio.
 
-I used a lot of my past modules to handle cross-browser differences, such as [touches](https://www.npmjs.com/package/touches) for unified mouse and touch handling, [web-audio-player](https://www.npmjs.com/package/web-audio-player) for iOS compatible WebAudio.
-
-There were a couple other particularly annoying browser issues that came up:
+There's a couple other browser issues that held me up — here's how I managed them:
 
 - In FireFox and MS Edge, sometimes `setTimeout` would not be fired in a timely manner if there is a lot of CPU activity going on in JavaScript. I didn't assume it would be accurate, but I wasn't prepared for it to fire 2-3 seconds late. Switching to [timeout-raf](https://www.npmjs.com/package/timeout-raf) fixed this issue.
-- You need to polyfill WebAudio [stereo panner node](https://www.npmjs.com/package/stereo-panner-node) for unsupported browsers (i.e. Safari), and even so, some browsers (like mobile iOS Safari) do not do well with panning. I had to disable panning in some cases, tweak audio throttling/timing to reduce pops and clicks, and call `audioContext.resume()` since Safari would sometimes decide to suspend the audio.
+- You need to polyfill WebAudio [stereo panner node](https://www.npmjs.com/package/stereo-panner-node) for unsupported browsers (i.e. Safari), and even so, some browsers (like mobile iOS Safari) do not do well with panning. For this reason, the effect is disabled in mobile.
+- Safari also had a few other issues: I had to throttle max simultaneous sounds to avoid pops/clicks, and before playback call `audioContext.resume()`  as the browser was occasionally suspending the audio context.
 - The JIT/JavaScript engine in MS Edge is *really* slow compared to other browsers; I couldn't do much to fix it except lower the plant detail.
 - Inside an iFrame in iOS Safari, sometimes you will get an incorrect `window.innerWidth`. To fix, I ended up having to use `position: fixed` with 100% width and height on the `canvas` style.
+
+## Credits
+
+Thanks to the team:
+
+- [Niko Hook](https://twitter.com/nikohook) (Sound Design)
+- [Matt Jakob](https://www.instagram.com/mattjakob/) (Creative Director)
+- [Sarah Arruda](https://twitter.com/arrudasarah) (Executive Producer)
+- [Ahmed Wageh](https://www.instagram.com/wagybwoi/) (Creative Developer)
+- [John Szebegyinszki](https://www.instagram.com/jszeb/) (Producer)
+
+As well as the rest of the team at Tendril.
