@@ -1,9 +1,10 @@
 ![screen](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/screen2.png?token=ABUdgxJHqyTSd5y_jr5ITB8JY1cFd-vyks5auSD9wA%3D%3D)
 
-I recently launched a small and interactive web toy for the Toronto-based design studio, [Tendril](https://tendril.ca/). You can try it out on their home page below. Their site rotates through different web toys, so you may need to reload once or twice to see it.
+<sup style="color: hsl(0, 0%, 50%);">— <em>Try the experience at <a href="https://tendril.ca/" target="_blank">https://tendril.ca/</a></em></sup>
 
-<center><iframe src="https://player.vimeo.com/video/260787450?autoplay=0&loop=1&color=ffffff&title=0&byline=0&portrait=0" height="512" width="512" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-</center>
+I recently launched a small and interactive web toy for the Toronto-based design studio, Tendril. You can try it out on their [home page](https://tendril.ca/). Their site rotates through different web toys, so you may need to reload once or twice to see it.
+
+<center><img src="https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/square-crop.gif?token=ABUdg7-vxckl3fDiV7MpWFi4KncKlokGks5auSkMwA%3D%3D" width="50%" /></center>
 <p></p>
 
 The experience is simple: brush your mouse across the generative plants to see them blossom and emit musical tones.
@@ -32,7 +33,7 @@ After chatting over a few different ideas, we settled on the broad concept of "i
 
 My early mood boards leaned toward a monochromatic and stark visual direction. It's great to reflect back on these, as it shows how much a project will change as it interates in development.
 
-<blockquote class="large"><p style="line-height: 22px;font-size: 14px;padding-top: 3px;">💡 On a related note — I wish there was an open source tool for generating flexible masonry-style mood boards from a set of pictures. The UX of InVision Boards is great, but it's a pay-to-use service.</p></blockquote>
+<blockquote class="large"><p style="line-height: 22px;font-size: 14px;padding-top: 3px;">💡 On a related note — I wish there was an open source tool for generating flexible masonry-style mood boards from a set of pictures. The UX of InVision Boards is great, but unfortunately it's a pay-to-use service.</p></blockquote>
 
 ## Generative Plants
 
@@ -42,11 +43,11 @@ My early mood boards leaned toward a monochromatic and stark visual direction. I
 
 Initially, I began prototyping plant structures with Canvas2D and lines. This proved to be a great way to quickly iterate on ideas and geometry, without worrying about complexities added by WebGL and the GPU.
 
-To build the procedural structure of the plants, I decided to use simple line segments and quadratic Bézier curves. A quadratic curve is made up of a start point, control point, and end point, as you can see in the screenshot below.
+To build the procedural structure of the plants, I decided to use simple line segments and quadratic Bézier curves. A quadratic curve, as pictured below, is made up of a start point, control point, and end point.
 
 <center><img src="https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/curve.png?token=ABUdg1nCn0vvn_BTIIViD9G-cNoOncTsks5auSRuwA%3D%3D" width="50%" /></center>
 
-Using simple primitives and parametric functions (like lines and curves) made it much easier to manage things like animations, fast GPU rendering, mouse collisions, and even sound design. For example: you can define *t*, a number between 0 and 1, and use a parametric function to quickly compute the 2D point at that value.
+Using simple primitives and parametric functions (like lines and curves) made it much easier to manage things like animations, fast GPU rendering, mouse collisions, and even sound design. For example: you can define *t*, a number between 0 and 1, and use a parametric function to efficiently compute the 2D point at that value.
 
 ### Structure
 
@@ -54,7 +55,7 @@ I define each plant with a "start" point (i.e. edge of screen) and "end" point (
 
 <center><img src="https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/p1.png?token=ABUdg4aT2YpdBU47E1Bqu_QfCR5FMTzDks5auSR6wA%3D%3D" width="50%" /></center>
 
-To extrude each leaf, you walk along the curve at regular intervals, determine the perpendicular normal of the curve at that position, and then scale & rotate the normal by some function so that it "feathers" outward like a leaf might.
+To extrude each leaf, you walk along the curve at regular intervals, determine the perpendicular normal of the curve at that position, and then scale & rotate the normal by some function so that it "feathers" outward like a leaf might. In my final experience, I used a mitered normal where segments join, rather than just a perpendicular normal for each segment.
 
 <center><img src="https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/p3.png?token=ABUdg24UCcLkZNAHI34Av_OViTObq82Iks5auSSDwA%3D%3D" width="50%" /></center>
 
@@ -64,7 +65,7 @@ I've stripped my code down to a small Canvas2D demo below, and you can view/edit
 
 <p></p>
 
-### Lessons Learned
+### Mistakes & Lessons Learned
 
 During this 2D prototyping phase, I made two mistakes that I will now be mindful of next time I prototype:
 
@@ -73,9 +74,9 @@ During this 2D prototyping phase, I made two mistakes that I will now be mindful
 
 ## Animations & Interactions
 
-Instead of using a complex and potentially CPU-intensive physics system, I decided to use simple springs on the vertices of the plant geometry. This makes them a bit more like Jell-O, but the end result feels a bit more playful.
+Instead of using a complex and potentially CPU-intensive physics system, I decided to use simple springs on the vertices of the plant geometry. This makes them feel a bit more like Jell-O, but produces a fun and playful interaction.
 
-For each vertex in the plant stem and its leaves, we assign a `target` point (i.e. the position it should spring toward), `position` (i.e. the current computed position), and `velocity` (the speed and direction of movement). The pseudo-code of our basic physics system might look like this:
+For each vertex in the plant stem and its leaves, I assign a `target` point (i.e. the point it should spring toward), `position` (i.e. the current computed point), and `velocity` (the speed and direction of movement). The pseudo-code of our basic physics system might look like this:
 
 ```js
 // 1. Add a mouse force to velocity
@@ -86,37 +87,41 @@ if (mouse is close enough to vertex) {
 // 2. Spring toward target
 const delta = target - position;
 velocity += delta * spring;
+
+// Dampen with constant "air friction"
 velocity *= friction;
+
+// Integrate the new vertex position
 position += velocity;
 ```
 
-I've included an interactive demo of this vertex springing, which shows how the quadratic curve can bounce and bend in response to mouse movemens. Try the demo below, or see the full code [here](https://codesandbox.io/s/2wv0vp0kor?hidenavigation=1&module=%2Fsrc%2Fdraw.js).
+I've included an interactive demo of this vertex springing, which shows how the quadratic curve can bounce and bend in response to mouse movements. Try the demo below, or browse the full code [here](https://codesandbox.io/s/2wv0vp0kor?hidenavigation=1&module=%2Fsrc%2Fdraw.js).
 
-<iframe src="https://codesandbox.io/embed/2wv0vp0kor?hidenavigation=1&module=%2Fsrc%2Fdraw.js&view=preview" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+<iframe src="https://codesandbox.io/embed/2wv0vp0kor?hidenavigation=1&module=%2Fsrc%2Fdraw.js&view=preview" scrolling="no" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 <p></p>
 
-One shortcoming of this approach is that it will not detect interactions with the curve itself; it will only detect interactions near the vertices in the curve. To produce more accurate sound interactions, I used a point-line intersection test on the smaller leaves (for the line segment between the stat and end vertices).
+Initially I used a *point within radius* test to determine mouse collisions. This is not perfect (there are "dead spots" on the leaf that do not trigger interactions). To produce more accurate sound effects when brushing the leaves, I used a *point to line segment distance* test on the smaller leaves.
 
 ## Rendering
 
 Although Canvas2D is great for quick prototypes, it isn't powerful enough to achieve things like per-pixel shading effects on a 2D geometry.
 
-Using ThreeJS and an orthographic camera, it wasn't too difficult to port all of the canvas code into WebGL. To render the plants, each stem is made of a single (re-used) `PlaneGeometry` with a custom vertex shader. The vertex shader positions the plane segments to fit along the curve (or line) defined by the stem or leaf.
+Thanks to ThreeJS and its `OrthographicCamera`, it wasn't too difficult to port all of the canvas code into WebGL. To render the plants, each stem is made of a single (re-used) `PlaneGeometry` with a custom vertex shader. The vertex shader positions the plane segments to fit along the curve (or line) defined by the stem or leaf.
 
-You can read more about this technique in a past Observable notebook I wrote, ["2D Quadratic Curves on the GPU"](https://beta.observablehq.com/@mattdesl/2d-quadratic-curves-on-the-gpu). Using this technique on the plant geometry, you end up with a scene like this:
+You can read more about this technique in a past Observable notebook I wrote, ["2D Quadratic Curves on the GPU"](https://beta.observablehq.com/@mattdesl/2d-quadratic-curves-on-the-gpu). Using a similar shader for the curves and line segments in each plant, you end up with a scene like this:
 
 ![scene](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/render1.png?token=ABUdgznNb71aaIdv2HXRkPoBhqyZyiIqks5auSSnwA%3D%3D)
 
-The vertex shader includes various parametric functions to sample varying line thickness along the *t* arc length. This ends up changing the silhouette of the geometry to more closely resemble tapered leaves.
+The vertex shader also includes some parametric functions to sample a varying line thickness along the *t* arc length. For example: `thickness = sin(t * PI)` to taper the start and end of the curve. This ends up changing the silhouette of the geometry to more closely resemble tapered leaves.
 
 ![scene](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/render2.png?token=ABUdgx39rzw08RRDVthDTDfVpPDpcZRPks5auSStwA%3D%3D)
 
-Lastly, colour and surface detail is added — each leaf has slight variation in brightness, hue, saturation, vein density and angle, and so forth. All of this is computed in the fragment shader – for example, the veins and center line on each leaf is based on the texture coordinates, using `fwidth()` to compute a smooth anti-aliased 2-3 pixel line.
+Lastly, colour and surface detail is added — each leaf has slight variation in brightness, hue, saturation, vein density and angle, and so forth. All of this is computed in the fragment shader – for example, the veins and center line on each leaf is based on the texture coordinates, using `fwidth()` to compute a smooth anti-aliased ~2 pixel line.
 
 ![scene](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/render3.png?token=ABUdg3vNKcDe-cMcC1yDBBJyD-SXHhNFks5auSS9wA%3D%3D)
 
-I used [dat.gui](https://github.com/dataarts/dat.gui) for visual sliders during development, and shared iterations with [surge.sh](https://surge.sh/). This allowed us to experiment with lots of different ideas and directions. It wasn't until later in development that we introduced animations to and from a thin black "wireframe" state.
+I used [dat.gui](https://github.com/dataarts/dat.gui) for visual sliders during development, and shared iterations with the rest of the team using [surge.sh](https://surge.sh/). This allowed us to experiment with lots of different ideas and directions. This iterative style of development allowed us to come up with some interesting features: it wasn't until later in the project that we introduced the idea of animating plants in from a black "hand-drawn" state.
 
 ![scene](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/render5.png?token=ABUdg089FM-ddO1MMJG8spaYUHO1ay7aks5auSTBwA%3D%3D)
 
@@ -128,11 +133,13 @@ Here's a few examples:
 
 - Randomness is used in almost all aspects of the experience, producing slight variations in the visuals, motion and sound. For example, randomizing length, curvature, density, timing, hue, thickness, brightness, volume, etc.
 - Sounds are throttled (by time and max simultaneous voices) to avoid popping or too much aural clutter.
-- The volume of a sound effect is modified based on your mouse velocity, giving bigger movements more dramatic audio outputs.
+- The volume of a sound effect is modified based on your mouse velocity. Faster mouse movements should produce slightly more dramatic sound effects.
 - Depending on the position of mouse interactions, the sound is panned left or right, giving a sense of spatialization.
 - Lots of performance optimizations: the entire scene is just one shader and 3 different geometries (of varying subdivisions). Tons of time spent looking through profilers and optimizing functions until it rendered smoothly across all browsers and devices. Screen pixel density, leaf density, plant organization, and other variables are changed depending on your browser and resolution.
 
-## Browser Pains
+## Performance & QA
+
+
 
 I used a lot of my past modules to handle cross-browser differences, such as [touches](https://www.npmjs.com/package/touches) for unified mouse and touch handling, [web-audio-player](https://www.npmjs.com/package/web-audio-player) for iOS compatible WebAudio.
 
