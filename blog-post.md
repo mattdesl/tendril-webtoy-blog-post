@@ -138,9 +138,9 @@ To bring more life to the project, I spent a *lot* of time on the little details
 
 Here's a few examples:
 
-- Randomness is used in almost all aspects of the experience, producing slight variations in the visuals, motion and sound. For example, randomizing length, curvature, density, timing, hue, thickness, brightness, volume, etc.
-- Sounds are throttled (by time and max simultaneous voices) to avoid popping or too much aural clutter.
-- The volume of a sound effect is modified based on your mouse velocity. Faster mouse movements should produce slightly more dramatic sound effects.
+- Randomness is used in almost all aspects of the experience, producing slight variations in the visuals, motion and sound. For example, randomizing length, curvature, density, timing, wind speeds, hue, thickness, brightness, volume, etc. In the end, I used a fixed random seed to produce a consistent look and feel for all users.
+- Sounds are throttled (by time and max simultaneous voices) to avoid popping and too much aural clutter.
+- The volume of a sound effect is modified based on your mouse velocity. Faster mouse movements produce slightly more dramatic sound effects.
 - Depending on the position of mouse interactions, the sound is panned left or right, giving a sense of spatialization.
 - Lots of performance optimizations: the entire scene is just one shader and 3 different geometries (of varying subdivisions). Tons of time spent looking through profilers and optimizing functions until it rendered smoothly across all browsers and devices. Screen pixel density, leaf density, plant organization, and other variables are changed depending on your browser and resolution.
 
