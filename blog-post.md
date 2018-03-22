@@ -6,7 +6,7 @@ Work in progress.
 
 ![screen](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/screen1.jpg)
 
-<sup style="color: hsl(0, 0%, 50%);">— <em>Try the experience at <a href="https://tendril.ca/" target="_blank">https://tendril.ca/</a></em></sup>
+<sup style="color: hsl(0, 0%, 50%);">— <em>See the experience in the video below, or try it in your browser at <a href="https://tendril.ca/" target="_blank">https://tendril.ca/</a></em></sup>
 
 I recently launched a small and interactive web toy for the Toronto-based design studio, Tendril. You can try it out on their [home page](https://tendril.ca/). Their site rotates through different web toys, so you may need to reload once or twice to see it.
 
@@ -58,7 +58,7 @@ Using simple primitives and parametric functions (like lines and curves) made it
 
 ### Structure
 
-I define each plant with a "start" point (e.g. an edge of the screen) and "end" point (e.g. somewhere closer to the center of the screen). Then, a control point is placed somewhere slightly off the center line between the two points, to give the impression of a bending plant stem.
+I define each plant with a "start" point (e.g. at the edge of the screen) and "end" point (e.g. somewhere closer to the center of the screen). Then, a control point is placed somewhere slightly off the center line between the two points, giving the impression of a bending plant stem.
 
 <center><img src="https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/p1.jpg" width="50%" /></center>
 
@@ -162,14 +162,12 @@ There's a couple other browser issues that held me up — here's how I managed
 
 Thanks to the team at Tendril, including:
 
-- [Niko Hook](https://twitter.com/nikohook) (Sound Design)
 - [Matt Jakob](https://www.instagram.com/mattjakob/) (Creative Director)
+- [Niko Hook](https://twitter.com/nikohook) (Sound Design)
 - [Sarah Arruda](https://twitter.com/arrudasarah) (Executive Producer)
 - [Ahmed Wageh](https://www.instagram.com/wagybwoi/) (Creative Developer)
 - [John Szebegyinszki](https://www.instagram.com/jszeb/) (Producer)
 
-## Source Code
-
-See below for the full source code:
+Below you can find the source code for this blog post and its interactive demos:
 
 [https://github.com/mattdesl/tendril-webtoy-blog-post](https://github.com/mattdesl/tendril-webtoy-blog-post)

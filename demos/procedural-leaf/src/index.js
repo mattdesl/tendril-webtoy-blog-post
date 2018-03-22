@@ -33,11 +33,19 @@ function resize() {
 // Handle resize & re-render events
 resize();
 window.addEventListener("resize", resize);
-window.addEventListener("click", ev => {
-  ev.preventDefault();
+
+const handleClick = () => {
   onClick();
   render();
+};
+
+window.addEventListener("click", ev => {
+  ev.preventDefault();
+  handleClick();
 });
+
+window.addEventListener("touchstart", handleClick);
+window.addEventListener("touchend", ev => ev.preventDefault());
 
 function render() {
   // Save state
