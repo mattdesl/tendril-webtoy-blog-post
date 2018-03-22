@@ -1,0 +1,20 @@
+{
+  "name": "springing-curves",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel index.html --open",
+    "build": "parcel build index.html"
+  },
+  "dependencies": {
+    "clamp": "1.0.1",
+    "gl-vec2": "1.2.0",
+    "touch-velocity": "0.0.3",
+    "touches": "1.2.2"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.6.1"
+  },
+  "keywords": []
+}

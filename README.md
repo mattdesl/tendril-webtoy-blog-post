@@ -52,7 +52,7 @@ Using simple primitives and parametric functions (like lines and curves) made it
 
 ### Structure
 
-I define each plant with a "start" point (i.e. edge of screen) and "end" point (somewhere closer to the center of the screen). Then, a control point is placed somewhere slightly off the center line between the two points, to give the impression of a bending plant stem.
+I define each plant with a "start" point (e.g. an edge of the screen) and "end" point (e.g. somewhere closer to the center of the screen). Then, a control point is placed somewhere slightly off the center line between the two points, to give the impression of a bending plant stem.
 
 <center><img src="https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/p1.png?token=ABUdg4aT2YpdBU47E1Bqu_QfCR5FMTzDks5auSR6wA%3D%3D" width="50%" /></center>
 
@@ -71,7 +71,7 @@ I've stripped my code down to a small Canvas2D demo below, and you can view/edit
 During this 2D prototyping phase, I made two mistakes that I will now be mindful of next time I prototype:
 
 - *Dimensionality:* It would have been great to translate this experience into three dimensions, allowing for more depth and a greater sense of motion. Most of these algorithms can be translated into 3D, but too much of my code and architecture made assumptions about only two dimensions.
-- *Units:* When I initially protoytped in 2D, I used pixels for scaling and placement. This proved challenging when adapting the experience for other resolutions. It would have been better to use relative coordinates throughout the generative code, such as (0, 0) for top left and (1, 1) for bottom right of the screen — like I did in the above CodeSandbox demo.
+- *Units:* When I initially protoytped in 2D, I used pixels for scaling and placement. This proved challenging when adapting the experience for other resolutions. It would have been better to use relative coordinates throughout the generative code, such as (0, 0) for top left and (1, 1) for bottom right of the screen — like I did in the above CodeSandbox demos.
 
 ## Animations & Interactions
 

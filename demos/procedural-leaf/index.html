@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title>test</title>
+	<meta charset="UTF-8" />
+	<style>
+		canvas {
+			background: white;
+			display: block;
+			box-shadow: 5px 10px 30px -10px rgba(0, 0, 0, 0.2);
+		}
+		p {
+			user-select: none;
+		}
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, "Helvetica", sans-serif;
+			font-size: 12px;
+			width: 100%;
+			cursor: pointer;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background: hsl(0, 0%, 90%);
+			margin: 0;
+			overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<canvas id="canvas"></canvas>
+		<p>Click to randomize the control point.</p>
+	</div>
+	<script src="src/index.js"></script>
+</body>
+</html>
