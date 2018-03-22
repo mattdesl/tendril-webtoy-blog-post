@@ -4,7 +4,7 @@ Work in progress.
 
 ---
 
-![screen](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/screen1.png?token=ABUdgwhyHQut4kBmHqsQc6fOTWax6-QNks5avDQiwA%3D%3D)
+![screen](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/screen1.jpg)
 
 <sup style="color: hsl(0, 0%, 50%);">— <em>Try the experience at <a href="https://tendril.ca/" target="_blank">https://tendril.ca/</a></em></sup>
 
@@ -24,7 +24,7 @@ In this post, I'll explore how I created the web toy alongside the amazing team 
 
 For a while now, Tendril has been showcasing different interactive animations on their home page (examples: [1](https://www.instagram.com/p/Bb4kkPyFrnd/?hl=en&taken-by=studiotendril), [2](https://www.instagram.com/p/BeV1pZoFtHa/?taken-by=studiotendril)). They approached me with the idea of developing a new experience that introduces some aspects of generative growth and procedural geometry.
 
-![previous](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/prev.png?token=ABUdg8uZO-Rfpf3hpklcOKx4fn2jzUZGks5auSN0wA%3D%3D)
+![previous](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/prev.png)
 
 <sup style="color: hsl(0, 0%, 50%)"><em>— One of Tendril's previous web toys</em></sup>
 
@@ -34,7 +34,7 @@ An open brief with full creative freedom was a welcome challenge for me. In the 
 
 After chatting over a few different ideas, we settled on the broad concept of "interacting with tropical plants".
 
-![mood](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/moodboard.png?token=ABUdg7U9xzcPvmZzetNMeuiDJkDv2oTdks5auSHTwA%3D%3D)
+![mood](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/moodboard.jpg)
 
 <sup style="color: hsl(0, 0%, 50%)"><em>— Early mood board</em></sup>
 
@@ -44,7 +44,7 @@ My early mood boards leaned toward a monochromatic and stark visual direction. I
 
 ## Generative Plants
 
-![2d](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/2d-prototype.png?token=ABUdg_zlk_OPL22eANzhaK4Jc5dH30m6ks5auSRdwA%3D%3D)
+![2d](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/2d-prototype.jpg)
 
 <sup style="color: hsl(0, 0%, 50%)"><em>— Early Canvas2D prototype of the procedural plant geometry</em></sup>
 
@@ -52,7 +52,7 @@ Initially, I began prototyping plant structures with Canvas2D and lines. This pr
 
 To build the procedural structure of the plants, I decided to use simple line segments and quadratic Bézier curves. A quadratic curve, as pictured below, is made up of a start point, control point, and end point.
 
-<center><img src="https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/curve.png?token=ABUdg1nCn0vvn_BTIIViD9G-cNoOncTsks5auSRuwA%3D%3D" width="50%" /></center>
+<center><img src="https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/curve.jpg" width="50%" /></center>
 
 Using simple primitives and parametric functions (like lines and curves) made it much easier to manage things like animations, fast GPU rendering, mouse collisions, and even sound design. For example: you can define *t*, a number between 0 and 1, and use a parametric function to efficiently compute the 2D point at that value.
 
@@ -60,11 +60,11 @@ Using simple primitives and parametric functions (like lines and curves) made it
 
 I define each plant with a "start" point (e.g. an edge of the screen) and "end" point (e.g. somewhere closer to the center of the screen). Then, a control point is placed somewhere slightly off the center line between the two points, to give the impression of a bending plant stem.
 
-<center><img src="https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/p1.png?token=ABUdg4aT2YpdBU47E1Bqu_QfCR5FMTzDks5auSR6wA%3D%3D" width="50%" /></center>
+<center><img src="https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/p1.jpg" width="50%" /></center>
 
 To extrude each leaf, you walk along the curve at regular intervals, determine the perpendicular normal of the curve at that position, and then scale & rotate the normal by some function so that it "feathers" outward like a leaf might. In my final experience, I used a mitered normal where segments join, rather than just a perpendicular normal for each segment.
 
-<center><img src="https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/p3.png?token=ABUdg24UCcLkZNAHI34Av_OViTObq82Iks5auSSDwA%3D%3D" width="50%" /></center>
+<center><img src="https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/p3.jpg" width="50%" /></center>
 
 I've stripped my code down to a small Canvas2D demo below, and you can view/edit the code [here](https://codesandbox.io/s/3ynwk2573m?hidenavigation=1&module=%2Fsrc%2Fdraw.js). Click the below demo to modify the curve structure.
 
@@ -118,19 +118,19 @@ Thanks to ThreeJS and its `OrthographicCamera`, it wasn't too difficult to port 
 
 You can read more about this technique in a past Observable notebook I wrote, ["2D Quadratic Curves on the GPU"](https://beta.observablehq.com/@mattdesl/2d-quadratic-curves-on-the-gpu). Using a similar shader for the curves and line segments in each plant, you end up with a scene like this:
 
-![scene](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/render1.png?token=ABUdgznNb71aaIdv2HXRkPoBhqyZyiIqks5auSSnwA%3D%3D)
+![scene](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/render1.jpg)
 
 The vertex shader also includes some parametric functions to sample a varying line thickness along the *t* arc length. For example: `thickness = sin(t * PI)` to taper the start and end of the curve. This ends up changing the silhouette of the geometry to more closely resemble tapered leaves.
 
-![scene](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/render2.png?token=ABUdgx39rzw08RRDVthDTDfVpPDpcZRPks5auSStwA%3D%3D)
+![scene](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/render2.jpg)
 
 Lastly, colour and surface detail is added — each leaf has slight variation in brightness, hue, saturation, vein density and angle, and so forth. All of this is computed in the fragment shader – for example, the veins and center line on each leaf is based on the texture coordinates, using `fwidth()` to compute a smooth anti-aliased ~2 pixel line.
 
-![scene](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/render3.png?token=ABUdg3vNKcDe-cMcC1yDBBJyD-SXHhNFks5auSS9wA%3D%3D)
+![scene](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/render3.jpg)
 
 I used [dat.gui](https://github.com/dataarts/dat.gui) for visual sliders during development, and shared iterations with the rest of the team using [surge.sh](https://surge.sh/). This allowed us to experiment with lots of different ideas and directions. This iterative style of development allowed us to come up with some interesting features: it wasn't until later in the project that we introduced the idea of animating plants in from a black "hand-drawn" state.
 
-![scene](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/render5.png?token=ABUdg089FM-ddO1MMJG8spaYUHO1ay7aks5auSTBwA%3D%3D)
+![scene](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/render4.jpg)
 
 ## The Little Details
 
