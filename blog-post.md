@@ -8,7 +8,7 @@ https://mattdesl.svbtle.com/tendril-web-toy
 
 ![screen](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/screen1.jpg)
 
-<sup style="color: hsl(0, 0%, 50%);">— <em>See the experience in the video below, or try it in your browser at <a href="https://tendril.ca/" target="_blank">https://tendril.ca/</a></em></sup>
+<sup style="color: hsl(0, 0%, 50%);">— <em>Try the experience in your browser at <a href="https://tendril.ca/" target="_blank">https://tendril.ca/</a></em></sup>
 
 I recently launched a small and interactive web toy for the Toronto-based design studio, Tendril. You can try it out on their [home page](https://tendril.ca/). Their site rotates through different web toys, so you may need to reload once or twice to see it.
 
