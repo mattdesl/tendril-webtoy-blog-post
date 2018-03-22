@@ -1,6 +1,8 @@
-# WIP
+# Blog Post
 
-Work in progress.
+The below markdown has been formatted for my blog on Svbtle. I recommend reading it there for best formatting and interactive iframe/video embeds:
+
+https://mattdesl.svbtle.com/tendril-web-toy
 
 ---
 
