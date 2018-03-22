@@ -1,4 +1,4 @@
-![screen](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/screen2.png?token=ABUdgxJHqyTSd5y_jr5ITB8JY1cFd-vyks5auSD9wA%3D%3D)
+![screen](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/screen1.png?token=ABUdgwhyHQut4kBmHqsQc6fOTWax6-QNks5avDQiwA%3D%3D)
 
 <sup style="color: hsl(0, 0%, 50%);">— <em>Try the experience at <a href="https://tendril.ca/" target="_blank">https://tendril.ca/</a></em></sup>
 
@@ -77,7 +77,7 @@ During this 2D prototyping phase, I made two mistakes that I will now be mindful
 
 Instead of using a complex and potentially CPU-intensive physics system, I decided to use simple springs on the vertices of the plant geometry. This makes them feel a bit more like Jell-O, but produces a fun and playful interaction.
 
-For each vertex in the plant stem and its leaves, I assign a `target` point (i.e. the point it should spring toward), `position` (i.e. the current computed point), and `velocity` (the speed and direction of movement). The pseudo-code of our basic physics system might look like this:
+For each vertex in the plant stem and its leaves, I assign a `target` (i.e. the point it should spring toward), `position` (i.e. the current computed point), and `velocity` (the speed and direction of movement). The pseudo-code of our basic physics system might look like this:
 
 ```js
 // 1. Add a mouse force to velocity
@@ -102,11 +102,11 @@ I've included an interactive demo of this vertex springing, which shows how the 
 
 <p></p>
 
-Initially I used a *point within radius* test to determine mouse collisions. This is not perfect (there are "dead spots" on the leaf that do not trigger interactions). To produce more accurate sound effects when brushing the leaves, I used a *point to line segment distance* test on the smaller leaves.
+For collisions, I'm using a [point within radius](https://www.npmjs.com/package/point-circle-collision) test to determine mouse collisions. This is fast to compute, but not perfect: there are some "dead spots" on the leaf that will not trigger interactions. To produce more accurate sound effects when brushing the leaves, I used a [point to line segment distance](https://gist.github.com/mattdesl/47412d930dcd8cd765c871a65532ffac) test on the smaller leaves. In retrospect, using the latter test everywhere would produce better mouse interactions, but the difference is hard to spot with small plant stems, a large mouse radius, and so many plants on screen at once.
 
 ## Rendering
 
-Although Canvas2D is great for quick prototypes, it isn't powerful enough to achieve things like per-pixel shading effects on a 2D geometry.
+Although Canvas2D was great during the prototype stage, it isn't powerful enough to achieve things like per-pixel shading effects.
 
 Thanks to ThreeJS and its `OrthographicCamera`, it wasn't too difficult to port all of the canvas code into WebGL. To render the plants, each stem is made of a single (re-used) `PlaneGeometry` with a custom vertex shader. The vertex shader positions the plane segments to fit along the curve (or line) defined by the stem or leaf.
 
