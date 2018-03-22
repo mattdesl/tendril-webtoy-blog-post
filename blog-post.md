@@ -108,23 +108,23 @@ I've included an interactive demo of this vertex springing, which shows how the 
 
 <p></p>
 
-For collisions, I'm using a [point within radius](https://www.npmjs.com/package/point-circle-collision) test to determine mouse collisions. This is fast to compute, but not perfect: there are some "dead spots" on the leaf that will not trigger interactions. To produce more accurate sound effects when brushing the leaves, I used a [point to line segment distance](https://gist.github.com/mattdesl/47412d930dcd8cd765c871a65532ffac) test on the smaller leaves. In retrospect, using the latter test everywhere would produce better mouse interactions, but the difference is hard to spot with small plant stems, a large mouse radius, and so many plants on screen at once.
+For collisions, I'm using a [point within radius](https://www.npmjs.com/package/point-circle-collision) test to determine mouse collisions. This is fast to compute, but not perfect: there are some "dead spots" on the leaf that will not trigger interactions. To produce more accurate sound effects when brushing the leaves, I used a [point to line segment distance](https://gist.github.com/mattdesl/47412d930dcd8cd765c871a65532ffac) test on the smaller leaves. In retrospect, using the latter test for mouse collisions would have produced better interactions, but the difference is hard to spot with a large mouse radius and all the plants in the final experience.
 
 ## Rendering
 
-Although Canvas2D was great during the prototype stage, it isn't powerful enough to achieve things like per-pixel shading effects.
+Although Canvas2D was great during the prototyping stage, it isn't powerful enough to achieve things like per-pixel shading effects.
 
-Thanks to ThreeJS and its `OrthographicCamera`, it wasn't too difficult to port all of the canvas code into WebGL. To render the plants, each stem is made of a single (re-used) `PlaneGeometry` with a custom vertex shader. The vertex shader positions the plane segments to fit along the curve (or line) defined by the stem or leaf.
+Thanks to ThreeJS and its `OrthographicCamera`, it wasn't too difficult to port all of the canvas code into WebGL. To render the plants, each stem is made of a single (re-used) `PlaneGeometry` and a custom vertex shader. The vertex shader positions the plane segments to fit along the curve (or line) defined by the stem or smaller leaf.
 
-You can read more about this technique in a past Observable notebook I wrote, ["2D Quadratic Curves on the GPU"](https://beta.observablehq.com/@mattdesl/2d-quadratic-curves-on-the-gpu). Using a similar shader for the curves and line segments in each plant, you end up with a scene like this:
+You can read more about this technique in a past Observable notebook I wrote, ["2D Quadratic Curves on the GPU"](https://beta.observablehq.com/@mattdesl/2d-quadratic-curves-on-the-gpu). Using this approach for the curves and line segments in each plant, you end up with a scene like this:
 
 ![scene](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/render1.jpg)
 
-The vertex shader also includes some parametric functions to sample a varying line thickness along the *t* arc length. For example: `thickness = sin(t * PI)` to taper the start and end of the curve. With these functions and a wider line thickness, the silhouette of the plane geometries begins to look more like tapered leaves.
+In my vertex shader, I also added parametric functions to sample a varying line thickness along the *t* arc length. For example: `thickness = sin(t * PI)` will pinch the start and end of the curve. With these functions and a wider line thickness, the silhouette of the plane geometries begins to look more like tapered leaves.
 
 ![scene](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/render2.jpg)
 
-Lastly, colour and surface detail is added — each leaf has slight variation in brightness, hue, saturation, vein density and angle, and so forth. All of this is computed in the fragment shader – for example, the veins and center line on each leaf is based on the texture coordinates, using `fwidth()` to compute a smooth anti-aliased ~2 pixel line.
+Lastly, colour and surface detail is added — each leaf has slight variation in brightness, hue, saturation, vein density and angle, and so forth. All of this is computed in the fragment shader – for example, the small veins and center line on each leaf is based on the texture coordinates, using `fwidth()` to compute a smooth anti-aliased 2-3 pixel line.
 
 ![scene](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/render3.jpg)
 
