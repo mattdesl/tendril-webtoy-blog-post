@@ -45,6 +45,7 @@ const position = vec2.scaleAndAdd([], origin, normal, length);
 
 ### Create a Polygon (Triangle, Diamond, Square, Circle, etc)
 
+```js
 // Center point of the circle
 const cx = 0;
 const cy = 0;
@@ -75,3 +76,4 @@ for (let i = 0; i < sides; i++) {
   // Add the point
   points.push([ px, py ]);
 }
+```
