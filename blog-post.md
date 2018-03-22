@@ -120,7 +120,7 @@ You can read more about this technique in a past Observable notebook I wrote, ["
 
 ![scene](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/render1.jpg)
 
-The vertex shader also includes some parametric functions to sample a varying line thickness along the *t* arc length. For example: `thickness = sin(t * PI)` to taper the start and end of the curve. This ends up changing the silhouette of the geometry to more closely resemble tapered leaves.
+The vertex shader also includes some parametric functions to sample a varying line thickness along the *t* arc length. For example: `thickness = sin(t * PI)` to taper the start and end of the curve. With these functions and a wider line thickness, the silhouette of the plane geometries begins to look more like tapered leaves.
 
 ![scene](https://raw.githubusercontent.com/mattdesl/tendril-webtoy-blog-post/master/images/render2.jpg)
 
@@ -160,7 +160,7 @@ There's a couple other browser issues that held me up — here's how I managed
 
 ## Credits
 
-Thanks to the team:
+Thanks to the team at Tendril, including:
 
 - [Niko Hook](https://twitter.com/nikohook) (Sound Design)
 - [Matt Jakob](https://www.instagram.com/mattjakob/) (Creative Director)
@@ -168,4 +168,8 @@ Thanks to the team:
 - [Ahmed Wageh](https://www.instagram.com/wagybwoi/) (Creative Developer)
 - [John Szebegyinszki](https://www.instagram.com/jszeb/) (Producer)
 
-As well as the rest of the team at Tendril.
+## Source Code
+
+See below for the full source code:
+
+[https://github.com/mattdesl/tendril-webtoy-blog-post](https://github.com/mattdesl/tendril-webtoy-blog-post)
